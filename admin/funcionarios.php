@@ -89,3 +89,220 @@
 	<div id="listar">
 	
 	</div>
+
+    <!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel"><?php if(@$_GET['funcao'] == 'editar'){
+
+					$nome_botao = 'Editar';
+					$id_reg = $_GET['id'];
+
+					//BUSCAR DADOS DO REGISTRO A SER EDITADO
+					$res = $pdo->query("select * from funcionarios where id = '$id_reg'");
+					$dados = $res->fetchAll(PDO::FETCH_ASSOC);
+					$nome = $dados[0]['nome'];
+					
+					$cpf = $dados[0]['cpf'];
+					$telefone = $dados[0]['telefone'];
+					$email = $dados[0]['email'];
+					$cargo = $dados[0]['cargo'];
+
+
+
+
+
+				echo 'Edição de Funcionários';
+			}else{
+				$nome_botao = 'Salvar';
+				echo 'Cadastro de Funcionários';
+			} ?>
+		</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+
+
+		<form method="post">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+
+						<input type="hidden" id="id"  name="id" value="<?php echo @$id_reg ?>" required>
+
+						<input type="hidden" id="cpf_antigo"  name="cpf_antigo" value="<?php echo @$cpf ?>" required>
+
+						<label for="exampleFormControlInput1">Nome</label>
+						<input type="text" class="form-control" id="nome" placeholder="Insira o Nome" name="nome" value="<?php echo @$nome ?>" required>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-sm-12">
+
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Cargo</label>
+						<select class="form-control" id="" name="cargo">
+
+
+
+							<?php 
+								//SE EXISTIR EDIÇÃO DOS DADOS, TRAZER COMO PRIMEIRO REGISTRO O CARGO DO FUNCIONARIO
+								if(@$_GET['funcao'] == 'editar'){
+
+									$res_espec = $pdo->query("SELECT * from cargos where nome = '$cargo'");
+							$dados_espec = $res_espec->fetchAll(PDO::FETCH_ASSOC);
+
+							for ($i=0; $i < count($dados_espec); $i++) { 
+								foreach ($dados_espec[$i] as $key => $value) {
+								}
+
+								$id_cargo = $dados_espec[$i]['id'];	
+								$nome_cargo = $dados_espec[$i]['nome'];
+
+							}
+
+
+									echo '<option value="'.$nome_cargo.'">'.$nome_cargo.'</option>';
+								}
+								
+
+
+								//TRAZER TODOS OS REGISTROS DE CARGOS
+								$res = $pdo->query("SELECT * from cargos order by nome asc");
+								$dados = $res->fetchAll(PDO::FETCH_ASSOC);
+
+								for ($i=0; $i < count($dados); $i++) { 
+									foreach ($dados[$i] as $key => $value) {
+									}
+
+									$id = $dados[$i]['id'];	
+									$nome = $dados[$i]['nome'];
+
+									if($nome_espec != $nome){
+										echo '<option value="'.$nome.'">'.$nome.'</option>';
+									}
+
+									
+								}
+								?>
+							</select>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 col-sm-12">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Email</label>
+							<input type="text" class="form-control" id="email" name="email" placeholder="Insira o Email" required value="<?php echo @$email ?>">
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">CPF</label>
+							<input type="text" class="form-control" id="cpf" name="cpf" placeholder="Insira o CPF" required value="<?php echo @$cpf ?>">
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Telefone</label>
+							<input type="text" class="form-control" id="telefone" name="telefone" placeholder="Insira o Telefone" value="<?php echo @$telefone ?>">
+						</div>
+					</div>
+				</div>
+
+
+
+		
+
+
+
+
+				<div id="mensagem" class="">
+
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button id="btn-fechar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+				<button name="<?php echo $nome_botao ?>" id="<?php echo $nome_botao ?>" class="btn btn-primary"><?php echo $nome_botao ?></button>
+
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+
+
+
+<!--CHAMADA DA MODAL NOVO -->
+<?php 
+if(@$_GET['funcao'] == 'novo' && @$item_paginado == ''){ 
+	
+	?>
+	<script>$('#btn-novo').click();</script>
+<?php } ?>
+
+
+<!--CHAMADA DA MODAL EDITAR -->
+<?php 
+if(@$_GET['funcao'] == 'editar' && @$item_paginado == ''){ 
+	
+	?>
+	<script>$('#btn-novo').click();</script>
+<?php } ?>
+
+
+
+<!--CHAMADA DA MODAL DELETAR -->
+<?php 
+if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){ 
+	$id = $_GET['id'];
+	?>
+
+	<div class="modal" id="modal-deletar" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Excluir Registro</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<p>Deseja realmente Excluir este Registro?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
+					<form method="post">
+						<input type="hidden" id="id"  name="id" value="<?php echo @$id ?>" required>
+
+						<button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+<?php } ?>
+
+
+
+<script>$('#modal-deletar').modal("show");</script>
+
+
+
+
+
+
+</div>
+
+
