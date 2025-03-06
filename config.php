@@ -9,4 +9,9 @@ $usuario = 'root';
 $senha = '';
 $banco = 'advocacia';
 
+//VALORES PARA A COMBOBOX DE PAGINAÇÃO
+$opcao1 = 5 ;
+$opcao2 = 8;
+$opcao3 = 10;
+
 ?>
