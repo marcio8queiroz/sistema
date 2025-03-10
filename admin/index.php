@@ -110,4 +110,5 @@ $item4 = 'clientes';
 
 </html>
 
-
+<script src="../js/core.min.js"></script>
+<script src="../js/script.js"></script>

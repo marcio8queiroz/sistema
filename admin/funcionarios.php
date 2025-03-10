@@ -330,8 +330,8 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 						
 						$('#email').val('')
 
-						$('#txtbuscar').val('')
-						$('#btn-buscar').click();
+						//$('#txtbuscar').val('')
+						//$('#btn-buscar').click();
 
 						//$('#btn-fechar').click();
 
