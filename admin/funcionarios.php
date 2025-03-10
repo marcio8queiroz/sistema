@@ -104,7 +104,6 @@
 					$res = $pdo->query("select * from funcionarios where id = '$id_reg'");
 					$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 					$nome = $dados[0]['nome'];
-					
 					$cpf = $dados[0]['cpf'];
 					$telefone = $dados[0]['telefone'];
 					$email = $dados[0]['email'];
@@ -294,15 +293,61 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 	
 <?php } ?>
 
-
-
 <script>$('#modal-deletar').modal("show");</script>
-
-
-
-
-
 
 </div>
 
+<!--MASCARAS -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+<script src="../js/mascaras.js"></script>
+
+
+<!--AJAX PARA INSERÇÃO DOS DADOS -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		var pag = "<?=$pagina?>";
+		$('#Salvar').click(function(event){
+			event.preventDefault();
+			
+			$.ajax({
+				url: pag + "/inserir.php",
+				method: "post",
+				data: $('form').serialize(),
+				dataType: "text",
+				success: function(mensagem){
+
+					$('#mensagem').removeClass()
+
+					if(mensagem == 'Cadastrado com Sucesso!!'){
+						
+						$('#mensagem').addClass('mensagem-sucesso')
+
+						$('#nome').val('')
+						$('#cpf').val('')
+						$('#telefone').val('')
+						
+						$('#email').val('')
+
+						$('#txtbuscar').val('')
+						$('#btn-buscar').click();
+
+						//$('#btn-fechar').click();
+
+
+
+
+					}else{
+						
+						$('#mensagem').addClass('mensagem-erro')
+					}
+					
+					$('#mensagem').text(mensagem)
+
+				},
+				
+			})
+		})
+	})
+</script>

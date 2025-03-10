@@ -35,6 +35,8 @@ $item4 = 'clientes';
 
   <link rel="stylesheet" href="../css/style-painel.css">
 
+  <script src="../js/core.min.js"></script>
+  <script src="../js/script.js"></script>
 
 </head>
 
@@ -109,5 +111,3 @@ $item4 = 'clientes';
 </html>
 
 
-<script src="../js/core.min.js"></script>
-<script src="../js/script.js"></script>
