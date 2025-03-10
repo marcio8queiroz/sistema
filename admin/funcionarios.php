@@ -330,8 +330,8 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 						
 						$('#email').val('')
 
-						//$('#txtbuscar').val('')
-						//$('#btn-buscar').click();
+						$('#txtbuscar').val('')
+						$('#btn-buscar').click();
 
 						//$('#btn-fechar').click();
 
@@ -349,5 +349,69 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 				
 			})
 		})
+	})
+</script>
+
+<!--AJAX PARA BUSCAR OS DADOS -->
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		var pag = "<?=$pagina?>";
+		$('#btn-buscar').click(function(event){
+			event.preventDefault();	
+			
+			$.ajax({
+				url: pag + "/listar.php",
+				method: "post",
+				data: $('form').serialize(),
+				dataType: "html",
+				success: function(result){
+					$('#listar').html(result)
+					
+				},
+				
+
+			})
+
+		})
+
+		
+	})
+</script>
+
+
+
+
+
+
+
+
+<!--AJAX PARA LISTAR OS DADOS -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		var pag = "<?=$pagina?>";
+
+		$.ajax({
+			url: pag + "/listar.php",
+			method: "post",
+			data: $('#frm').serialize(),
+			dataType: "html",
+			success: function(result){
+				$('#listar').html(result)
+
+			},
+
+			
+		})
+	})
+</script>
+
+
+
+<!--AJAX PARA BUSCAR OS DADOS PELA TXT -->
+<script type="text/javascript">
+	$('#txtbuscar').keyup(function(){
+		$('#btn-buscar').click();
 	})
 </script>

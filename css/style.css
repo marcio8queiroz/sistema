@@ -106,3 +106,19 @@
 .banner-text p {
     color: #fff;
 }
+
+.mensagem-sucesso {
+    font-size: 16px;
+    color: #4c7438;
+    text-align: center;
+}
+
+.mensagem-erro {
+    font-size: 16px;
+    color: #a94659;
+    text-align: center;
+}
+
+.tabelas {
+    font-size: 14px;
+}
