@@ -27,7 +27,7 @@ if($linhas == 0){
 	$res->execute();
 
 
-/*	if($cargo == 'Advogado'){
+	if($cargo == 'Advogado'){
 		$res = $pdo->prepare("INSERT into advogados (nome, cpf, telefone, email) values (:nome, :cpf, :telefone, :email) ");
 
 	$res->bindValue(":nome", $nome);
@@ -61,7 +61,7 @@ if($linhas == 0){
 	$res->bindValue(":nivel", 'Tesoureiro');
 
 	$res->execute();
-	} */
+	} 
 	
 
 	
