@@ -464,3 +464,28 @@ if (@$_GET['funcao'] == 'excluir' && @$item_paginado == '') {
 		})
 	})
 </script>
+
+<!--AJAX PARA EXCLUSÃO DOS DADOS -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		var pag = "<?=$pagina?>";
+		$('#btn-deletar').click(function(event){
+			event.preventDefault();
+			
+			$.ajax({
+				url: pag + "/excluir.php",
+				method: "post",
+				data: $('form').serialize(),
+				dataType: "text",
+				success: function(mensagem){
+
+					$('#txtbuscar').val('')
+					$('#btn-buscar').click();
+					$('#btn-cancelar-excluir').click();
+
+				},
+				
+			})
+		})
+	})
+</script>

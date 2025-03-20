@@ -9,6 +9,7 @@ $item1 = 'home';
 $item2 = 'funcionarios';
 $item3 = 'advogados';
 $item4 = 'clientes';
+$item5 = 'cargos';
 
 ?>
 
@@ -85,6 +86,8 @@ $item4 = 'clientes';
                     </li>
                     <li class="rd-nav-item"><a class="rd-nav-link" href="index.php?acao=<?php echo $item4 ?>">Clientes</a>
                     </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="index.php?acao=<?php echo $item5 ?>">Cargos</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -110,7 +113,9 @@ $item4 = 'clientes';
       include_once($item3 . ".php");
     } elseif (@$_GET['acao'] == $item4) {
       include_once($item4 . ".php");
-    }
+    } elseif (@$_GET['acao'] == $item5) {
+    include_once($item5 . ".php");
+  }
     ?>
   </div>
 
