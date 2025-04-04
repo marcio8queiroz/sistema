@@ -34,6 +34,7 @@ if($linhas == 0){
 	$res->bindValue(":cpf", $cpf);
 	$res->bindValue(":telefone", $telefone);
 	$res->bindValue(":email", $email);
+	
 
 	$res->execute();
 
@@ -63,11 +64,6 @@ if($linhas == 0){
 	$res->execute();
 	} 
 	
-
-	
-	
-
-
 
 
 	echo "Cadastrado com Sucesso!!";

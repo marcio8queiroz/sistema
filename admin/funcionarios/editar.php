@@ -58,8 +58,6 @@ if($cargo == 'Advogado'){
 
 	$res->execute();
 
-
-
 	
 	$res = $pdo->prepare("UPDATE usuarios set nome = :nome,  usuario = :usuario, senha = :senha, senha_original = :senha_original, nivel = :nivel where usuario = :id ");
 
@@ -69,7 +67,6 @@ if($cargo == 'Advogado'){
 	$res->bindValue(":senha_original", $cpf_limpo);
 	$res->bindValue(":nivel", 'Advogado');
 	$res->bindValue(":id", $email);
-
 	$res->execute();
 	}
 

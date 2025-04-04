@@ -103,7 +103,7 @@ $item5 = 'cargos';
   <script src="../js/script.js"></script>
 
 
-  <div class="container-fluid conteudo-painel">
+  <div class="container conteudo-painel">
     <?php
     if (@$_GET['acao'] == $item1) {
       include_once($item1 . ".php");

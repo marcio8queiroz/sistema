@@ -94,7 +94,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel"><?php if (@$_GET['funcao'] == 'editar') {
-
+					$disabled = 'disabled';
 																	$nome_botao = 'Editar';
 																	$id_reg = $_GET['id'];
 
@@ -113,6 +113,7 @@
 
 																	echo 'Edição de Funcionários';
 																} else {
+																	$disabled = '';
 																	$nome_botao = 'Salvar';
 																	echo 'Cadastro de Funcionários';
 																} ?>
@@ -142,7 +143,7 @@
 
 							<div class="form-group">
 								<label for="exampleFormControlSelect1">Cargo</label>
-								<select class="form-control" id="" name="cargo">
+								<select class="form-control" id="" name="cargo" <?php echo @$disabled ?>>
 
 
 
