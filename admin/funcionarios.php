@@ -94,7 +94,6 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel"><?php if (@$_GET['funcao'] == 'editar') {
-					$disabled = 'disabled';
 																	$nome_botao = 'Editar';
 																	$id_reg = $_GET['id'];
 
@@ -113,7 +112,7 @@
 
 																	echo 'Edição de Funcionários';
 																} else {
-																	$disabled = '';
+
 																	$nome_botao = 'Salvar';
 																	echo 'Cadastro de Funcionários';
 																} ?>
@@ -143,8 +142,18 @@
 
 							<div class="form-group">
 								<label for="exampleFormControlSelect1">Cargo</label>
-								<select class="form-control" id="" name="cargo" <?php echo @$disabled ?>>
 
+								<?php if (@$_GET['funcao'] == 'editar') { ?>
+
+									<div class="form-group">
+										
+										<input type="text" class="form-control" placeholder="Insira o Email" disabled value="<?php echo @$cargo ?>">
+										<input type="hidden" class="form-control" name="cargo" placeholder="Insira o Email"  value="<?php echo @$cargo ?>">
+										<input type="hidden" class="form-control" id="email" name="email" placeholder="Insira o Email"  value="<?php echo @$email ?>">
+									</div>
+
+								<?php }else{ ?>
+								<select class="form-control" id="" name="cargo">
 
 
 									<?php
@@ -185,6 +194,7 @@
 									}
 									?>
 								</select>
+								<?php } ?>
 							</div>
 						</div>
 
@@ -194,7 +204,11 @@
 						<div class="col-md-4 col-sm-12">
 							<div class="form-group">
 								<label for="exampleFormControlInput1">Email</label>
+								<?php if (@$_GET['funcao'] == 'editar') { ?>
+									<input type="text" class="form-control" placeholder="Insira o Email" disabled value="<?php echo @$email ?>">
+									<?php }else { ?>
 								<input type="text" class="form-control" id="email" name="email" placeholder="Insira o Email" required value="<?php echo @$email ?>">
+								<?php } ?>
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-12">
@@ -468,24 +482,24 @@ if (@$_GET['funcao'] == 'excluir' && @$item_paginado == '') {
 
 <!--AJAX PARA EXCLUSÃO DOS DADOS -->
 <script type="text/javascript">
-	$(document).ready(function(){
-		var pag = "<?=$pagina?>";
-		$('#btn-deletar').click(function(event){
+	$(document).ready(function() {
+		var pag = "<?= $pagina ?>";
+		$('#btn-deletar').click(function(event) {
 			event.preventDefault();
-			
+
 			$.ajax({
 				url: pag + "/excluir.php",
 				method: "post",
 				data: $('form').serialize(),
 				dataType: "text",
-				success: function(mensagem){
+				success: function(mensagem) {
 
 					$('#txtbuscar').val('')
 					$('#btn-buscar').click();
 					$('#btn-cancelar-excluir').click();
 
 				},
-				
+
 			})
 		})
 	})
